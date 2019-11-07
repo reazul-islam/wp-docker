@@ -3,7 +3,6 @@
 certs/
 certs-data/
 logs/
-nginx/
 mysql/
 wordpress/
 !.env.example

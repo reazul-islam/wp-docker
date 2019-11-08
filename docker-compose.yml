@@ -5,6 +5,7 @@ services:
     container_name: mysql
     volumes:
       - ./mysql:/var/lib/mysql
+      - ./config/my.cnf:/etc/mysql/my.cnf
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-password}
       - MYSQL_USER=${MYSQL_USER:-root}

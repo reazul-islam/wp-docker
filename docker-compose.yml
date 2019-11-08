@@ -2,7 +2,7 @@ version: '3.7'
 services:
   mysql:
     image: mariadb:${MARIADB_VERSION:-latest}
-    container_name: mysql
+    container_name: mysql_dev
     volumes:
       - ./mysql:/var/lib/mysql
       - ./config/my.cnf:/etc/mysql/my.cnf
@@ -14,11 +14,11 @@ services:
     restart: always
     networks:
       local-network:
-        ipv4_address: 172.28.5.10
+        ipv4_address: 172.28.5.11
 
   wordpress:
     image: wordpress:${WORDPRESS_VERSION:-php7.3-fpm}
-    container_name: wordpress
+    container_name: wordpress_dev
     volumes:
       - ./config/php.conf.ini:/usr/local/etc/php/conf.d/conf.ini
       - ./wordpress:/var/www/html
@@ -33,11 +33,11 @@ services:
     restart: always
     networks:
       local-network:
-        ipv4_address: 172.28.5.2
+        ipv4_address: 172.28.5.12
 
   nginx:
     image: nginx:${NGINX_VERSION:-latest}
-    container_name: nginx
+    container_name: nginx_dev
     ports:
       - '${NGINX_PORT:-8001}:80'
     volumes:
@@ -50,11 +50,11 @@ services:
     restart: always
     networks:
       local-network:
-        ipv4_address: 172.28.5.3
+        ipv4_address: 172.28.5.13
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    container_name: phpmyadmin
+    container_name: phpmyadmin_dev
     ports:
       - '${PMA_PORT:-8002}:80'
     environment:
@@ -69,11 +69,11 @@ services:
     restart: always
     networks:
       local-network:
-        ipv4_address: 172.28.5.4
+        ipv4_address: 172.28.5.14
 
 #  adminer:
 #    image: adminer
-#    container_name: adminer
+#    container_name: adminer_dev
 #    restart: always
 #    links:
 #      - mysql
@@ -81,7 +81,7 @@ services:
 #      - '${ADMINER_PORT:-8003}:8080'
 #    networks:
 #      local-network:
-#        ipv4_address: 172.28.5.5
+#        ipv4_address: 172.28.5.15
 networks:
     local-network:
       name: local-network

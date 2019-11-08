@@ -70,17 +70,17 @@ services:
       local-network:
         ipv4_address: 172.28.5.4
 
-  adminer:
-    image: adminer
-    container_name: adminer
-    restart: always
-    links:
-      - mysql
-    ports:
-      - '${ADMINER_PORT:-8003}:8080'
-    networks:
-      local-network:
-        ipv4_address: 172.28.5.5
+#  adminer:
+#    image: adminer
+#    container_name: adminer
+#    restart: always
+#    links:
+#      - mysql
+#    ports:
+#      - '${ADMINER_PORT:-8003}:8080'
+#    networks:
+#      local-network:
+#        ipv4_address: 172.28.5.5
 networks:
     local-network:
       name: local-network

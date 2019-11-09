@@ -62,7 +62,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
       - MYSQL_DATABASE=${MYSQL_DATABASE:-wordpress}      
       - PMA_ABSOLUTE_URI=${PMA_ABSOLUTE_URI}
-      - PMA_HOST=mysql
+      - PMA_HOST=172.28.5.10
     depends_on:
       - mysql
     restart: always

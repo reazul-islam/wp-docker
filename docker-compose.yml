@@ -1,6 +1,6 @@
 version: '3.7'
 services:
-  mysql:
+  mysql_dev:
     image: mariadb:${MARIADB_VERSION:-latest}
     container_name: mysql_dev
     volumes:
@@ -13,8 +13,8 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE:-wordpress}
     restart: always
     networks:
-      local-network:
-        ipv4_address: 172.28.5.11
+      local-network-dev:
+        ipv4_address: 172.29.6.11
 
   wordpress:
     image: wordpress:${WORDPRESS_VERSION:-php7.3-fpm}
@@ -29,11 +29,11 @@ services:
       - WORDPRESS_DB_USER=${WORDPRESS_DB_USER:-root}
       - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD:-password}
     depends_on:
-      - mysql
+      - mysql_dev
     restart: always
     networks:
-      local-network:
-        ipv4_address: 172.28.5.12
+      local-network-dev:
+        ipv4_address: 172.29.6.12
 
   nginx:
     image: nginx:${NGINX_VERSION:-latest}
@@ -48,8 +48,8 @@ services:
       - wordpress
     restart: always
     networks:
-      local-network:
-        ipv4_address: 172.28.5.13
+      local-network-dev:
+        ipv4_address: 172.29.6.13
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -62,13 +62,13 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
       - MYSQL_DATABASE=${MYSQL_DATABASE:-wordpress}      
       - PMA_ABSOLUTE_URI=${PMA_ABSOLUTE_URI}
-      - PMA_HOST=mysql
+      - PMA_HOST=mysql_dev
     depends_on:
-      - mysql
+      - mysql_dev
     restart: always
     networks:
-      local-network:
-        ipv4_address: 172.28.5.14
+      local-network-dev:
+        ipv4_address: 172.29.6.14
 
 #  adminer:
 #    image: adminer
@@ -82,10 +82,10 @@ services:
 #      local-network:
 #        ipv4_address: 172.28.5.15
 networks:
-    local-network:
-      name: local-network
+    local-network-dev:
+      name: local-network-dev
       driver: bridge
       ipam:
         driver: default
         config:
-         - subnet: 172.28.5.0/24
+         - subnet: 172.29.6.0/24
